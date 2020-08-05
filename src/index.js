@@ -77,9 +77,14 @@ const Application = (props) => {
   }, []);
 
   return (
-    <div id='comparison-container'>
-      <div id='basemap' className='map'></div>
-      <div id='aerial' className='map'></div>
+    <div>
+      <div id='url-template-container' className='sidebarStyle'>
+        <label>URL Template:<input id='url-template' /></label>
+      </div>
+      <div id='comparison-container'>
+        <div id='basemap' className='map'></div>
+        <div id='aerial' className='map'></div>
+      </div>
     </div>
   );
 }

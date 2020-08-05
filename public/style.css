@@ -18,3 +18,20 @@ body * {
   bottom: 0;
   width: 100%;
 }
+
+.sidebarStyle {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 12px;
+  background-color: #404040;
+  color: #ffffff;
+  z-index: 1 !important;
+  padding: 6px;
+}
+
+#url-template {
+  margin-left: 1em;
+}
