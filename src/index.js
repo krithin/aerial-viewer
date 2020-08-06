@@ -49,6 +49,7 @@ var addAerialRasterLayer = (map, urlTemplate) => {
 const Application = (props) => {
   const bingURLTemplate = 'https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z';
   const [urlTemplate, setUrlTemplate] = useState(bingURLTemplate);
+  const [zoomOffset, setZoomOffset] = useState(0);
 
   const baseMap = React.useRef(null);
   const aerialMap = React.useRef(null);
@@ -90,11 +91,18 @@ const Application = (props) => {
       }
       addAerialRasterLayer(aerialMap.current, urlTemplate);
     }
-  }, [urlTemplate]);
+    console.log(urlTemplate);
+    console.log(zoomOffset);
+  }, [urlTemplate, zoomOffset]);
 
   return (
     <div>
-      <URLTemplateInput defaultValue={urlTemplate} onChange={setUrlTemplate} />
+      <URLTemplateInput
+          defaultURL={urlTemplate}
+          onChangeURL={setUrlTemplate}
+          defaultZoomOffset={zoomOffset}
+          onChangeZoomOffset={setZoomOffset}
+      />
       <div id='comparison-container'>
         <div id='basemap' className='map'></div>
         <div id='aerial' className='map'></div>
