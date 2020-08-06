@@ -7,7 +7,7 @@ const URLTemplateInput = (props) => {
     <div id='url-template-container' className='sidebarStyle'>
       <div>
         <label>URL Template:
-          <textarea ref={urlTemplateInput} id='url-template' rows="6" value={props.defaultURL} onChange={() => props.onChangeURL(urlTemplateInput.current.value)} />
+          <textarea ref={urlTemplateInput} id='url-template' rows="3" value={props.defaultURL} onChange={() => props.onChangeURL(urlTemplateInput.current.value)} />
         </label>
       </div>
       <div>

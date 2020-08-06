@@ -30,3 +30,7 @@ body * {
   display: inline-block;
   vertical-align: middle;
 }
+
+.sidebarStyle textarea {
+  width: 50em;
+}

@@ -46,6 +46,18 @@ var addAerialRasterLayer = (map, urlTemplate) => {
   }, 'borders');
 };
 
+var transformZoomOffset = (url, resourceType) => {
+  if (resourceType !== 'Tile') return null;
+
+  const zoomOffsetRegex = /(\d+){zoomOffset=(-?\d+)}/;
+  const match = url.match(zoomOffsetRegex);
+  if (match) {
+    const z = Number(match[1]);
+    const zoomOffset = Number(match[2]);
+    return { url: url.replace(zoomOffsetRegex, String(z + zoomOffset)) };
+  }
+}
+
 const Application = (props) => {
   const bingURLTemplate = 'https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z';
   const [urlTemplate, setUrlTemplate] = useState(bingURLTemplate);
@@ -67,7 +79,8 @@ const Application = (props) => {
       container: 'aerial',
       style: 'mapbox://styles/mapbox/dark-v10',
       center: [0, 0],
-      zoom: 0
+      zoom: 0,
+      transformRequest: transformZoomOffset,
     });
     aerialMap.current.on('load', () => {
       addTileGuideLayers(aerialMap.current);
@@ -84,15 +97,21 @@ const Application = (props) => {
   }, []);
 
   React.useEffect(() => {
+    console.log(urlTemplate);
+    console.log(zoomOffset);
     if (aerialMap.current.loaded()) {
       if (aerialMap.current.getSource('raster-tiles')) {
         aerialMap.current.removeLayer('raster-tiles');
         aerialMap.current.removeSource('raster-tiles');
       }
-      addAerialRasterLayer(aerialMap.current, urlTemplate);
+      var template = urlTemplate;
+      if (zoomOffset && zoomOffset != 0) {
+        console.log('hi', zoomOffset);
+        template = urlTemplate.replace('{z}', `{z}{zoomOffset=${zoomOffset}}`);
+      }
+      console.log(template);
+      addAerialRasterLayer(aerialMap.current, template);
     }
-    console.log(urlTemplate);
-    console.log(zoomOffset);
   }, [urlTemplate, zoomOffset]);
 
   return (
