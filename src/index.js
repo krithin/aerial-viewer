@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import Compare from 'mapbox-gl-compare';
+import URLTemplateInput from './URLTemplateInput';
 
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
@@ -45,17 +46,6 @@ var addAerialRasterLayer = (map, urlTemplate) => {
   }, 'borders');
 };
 
-const URLTemplateInput = (props) => {
-  const textArea = React.useRef();
-  return (
-    <div id='url-template-container' className='sidebarStyle'>
-      <label>URL Template:
-        <textarea ref={textArea} id='url-template' rows="1" defaultValue={props.value} onChange={() => props.onChange(textArea.current.value)} />
-      </label>
-    </div>
-  )
-};
-
 const Application = (props) => {
   const bingURLTemplate = 'https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z';
   const [urlTemplate, setUrlTemplate] = useState(bingURLTemplate);
@@ -93,7 +83,6 @@ const Application = (props) => {
   }, []);
 
   React.useEffect(() => {
-    console.log(urlTemplate);
     if (aerialMap.current.loaded()) {
       if (aerialMap.current.getSource('raster-tiles')) {
         aerialMap.current.removeLayer('raster-tiles');
