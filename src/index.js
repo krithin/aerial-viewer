@@ -57,7 +57,8 @@ const URLTemplateInput = (props) => {
 };
 
 const Application = (props) => {
-  const [urlTemplate, setUrlTemplate] = useState('https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z');
+  const bingURLTemplate = 'https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=587&mkt=en-gb&n=z';
+  const [urlTemplate, setUrlTemplate] = useState(bingURLTemplate);
 
   const baseMap = React.useRef(null);
   const aerialMap = React.useRef(null);
@@ -79,7 +80,7 @@ const Application = (props) => {
     });
     aerialMap.current.on('load', () => {
       addTileGuideLayers(aerialMap.current);
-      addAerialRasterLayer(aerialMap.current, urlTemplate);
+      addAerialRasterLayer(aerialMap.current, bingURLTemplate);
     });
 
     // A selector or reference to HTML element
