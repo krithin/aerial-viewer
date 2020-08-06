@@ -5,10 +5,6 @@ body {
 }
 
 body * {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -20,8 +16,6 @@ body * {
 }
 
 .sidebarStyle {
-  display: flex;
-  flex-direction: row;
   position: absolute;
   top: 0;
   right: 0;
@@ -32,6 +26,7 @@ body * {
   padding: 6px;
 }
 
-#url-template {
-  margin-left: 1em;
+.sidebarStyle label, .sidebarStyle textarea {
+  display: inline-block;
+  vertical-align: middle;
 }
